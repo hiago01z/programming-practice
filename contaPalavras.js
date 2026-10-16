@@ -1,18 +1,26 @@
 const fs = require("fs");
+const trataErros = require("./trataErros");
 const caminhoTexto = process.argv[2];
 
-
-function extraiTexto(caminhoTexto) { 
+function extraiExibeTexto(caminhoTexto) {
   fs.readFile(caminhoTexto, "utf8", (erro, textoAqui) => {
     try {
-      if (erro) {
-        throw erro;
-      }
+      if (erro) throw erro;
       console.log(textoAqui);
+      contaPalavrasDuplicadas(textoAqui);
     } catch (erro) {
-      console.log("Ocorreu um erro: ", erro.code);
+      trataErros(erro);
     }
   });
+}
+
+function contaPalavrasDuplicadas(texto) {
+  const resultado = {};
+  let palavras = texto.split(/\s+/);
+  palavras = palavras.forEach((palavra) => {
+    resultado[palavra] = (resultado[palavra] || 0) + 1;
+  });
+  console.log(resultado);
 }
 
 function contaPalavras(texto) {
@@ -20,11 +28,9 @@ function contaPalavras(texto) {
   console.log("Existem ", texto.length, " palavras no texto.");
 }
 
-function limpaPalavras(palavras){
-     palavrasLimpas = palavras.replace(/[<>.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
-    
+function limpaPalavras(palavras) {
+  palavras = palavras.replace(/[<>.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+  return palavras;
 }
 
-
-extraiTexto(caminhoTexto);
-
+extraiExibeTexto(caminhoTexto);
