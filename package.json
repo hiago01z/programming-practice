@@ -1,0 +1,21 @@
+{
+  "name": "programming-practice",
+  "version": "1.0.0",
+  "description": "<p>Jogo de adivinhar um número aleatório atribuido a uma variável.",
+  "main": "contaPalavras.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiago01z/programming-practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/hiago01z/programming-practice/issues"
+  },
+  "homepage": "https://github.com/hiago01z/programming-practice#readme"
+}
