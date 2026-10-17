@@ -17,3 +17,4 @@ function limpaPalavras(palavras) {
   return palavras;
 }
 
+//use programming-practice\contaPalavras\src> node cli.js ../arquivoTexto/textoExemplo.txt no terminal
