@@ -4,53 +4,84 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-function coletaNumerosMostraResultado(calculo, operacao) {
-  let numero1 = null;
-  let numero2 = null;
-  coletaNumero1(numero1);
-  coletaNumero2(numero2);
-  calculo(numero1, numero2, operacao);
-}
+export function realizaOperacao(
+  calculo,
+  soma,
+  subtracao,
+  multiplicação,
+  divisao,
+) {
+  const iniciarNovamente = () =>
+    realizaOperacao(calculo, soma, subtracao, multiplicação, divisao);
 
-function coletaOperacao(operacao) {
   rl.question(
     "Escolha a operação digitando + para soma, - para subtração, / para divisão ou * para multiplicação: ",
     (resposta) => {
-      if (
-        resposta == "/" ||
-        resposta == "*" ||
-        resposta == "-" ||
-        resposta == "+"
-      ) {
-               
-      } else {
-        console.log("Escolha uma operação válida.");
-        coletaNumerosMostraResultado();
+      let operacao;
+
+      switch (resposta.trim()) {
+        case "+":
+          operacao = soma;
+          break;
+        case "-":
+          operacao = subtracao;
+          break;
+        case "*":
+          operacao = multiplicação;
+          break;
+        case "/":
+          operacao = divisao;
+          break;
+        default:
+          console.log("Escolha uma operação válida.");
+          return iniciarNovamente();
       }
+
+      coletaNumero1((numero1) => {
+        coletaNumero2((numero2) => {
+          calculo(numero1, numero2, operacao);
+          reiniciar(iniciarNovamente);
+        });
+      });
     },
   );
 }
 
-function coletaNumero1(numero) {
-  return rl.question("Digite o primeiro número: ", (primeiroNumero) => {
-    numero = Number(primeiroNumero);
-    if (isNaN.numero1) {
-      return numero;
-    } else {
+export function coletaNumero1(callback) {
+  rl.question("Digite o primeiro número: ", (resposta) => {
+    const numero = Number(resposta);
+
+    if (resposta.trim() === "" || !Number.isFinite(numero)) {
       console.log("Digite somente números.");
-      coletaNumero1();
+      return coletaNumero1(callback);
     }
+
+    callback(numero);
   });
 }
 
-function coletaNumero2(numero) {
-  return rl.question("Digite o segundo número: ", (segundoNumero) => {
-    numero = Number(segundoNumero);
-    if (isNaN.numero) {
-      return numero;
-    } else {
+export function coletaNumero2(callback) {
+  rl.question("Digite o segundo número: ", (resposta) => {
+    const numero = Number(resposta);
+
+    if (resposta.trim() === "" || !Number.isFinite(numero)) {
       console.log("Digite somente números.");
-      coletaNumero2();
+      return coletaNumero2(callback);
     }
+
+    callback(numero);
   });
+}
+
+export function reiniciar(funcao) {
+  rl.question(
+    "Digite 1 para reiniciar ou qualquer outra tecla para sair: ",
+    (resposta) => {
+      if (resposta.trim() === "1") {
+        funcao();
+      } else {
+        rl.close();
+      }
+    },
+  );
 }
