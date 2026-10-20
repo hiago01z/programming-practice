@@ -1,0 +1,37 @@
+JavaScript: o que é o null e qual a diferença para undefined?
+Uma coisa interessante sobre JavaScript é que existem duas maneiras comuns de representar a ausência de um valor: null e undefined. Apesar de parecerem iguais, eles têm significados diferentes.
+- undefined: significa que um valor ainda não foi definido.
+- null: significa que você definiu intencionalmente que não existe nenhum valor ali.
+Veja este exemplo:
+let nome;
+console.log(nome); // undefined
+
+let sobrenome = null;
+console.log(sobrenome); // null
+
+
+No primeiro caso, criamos a variável nome, mas não atribuímos nenhum valor a ela. Por isso, ela recebe undefined.
+
+No segundo caso, atribuímos null explicitamente para indicar que não há um sobrenome armazenado.
+🧠 Mas quando isso é útil na prática?
+Imagine que você esteja criando um sistema de cadastro de usuários. Uma pessoa pode ainda não ter informado seu telefone.
+let telefone = null;
+
+if (telefone === null) {
+    console.log("O usuário ainda não informou o telefone.");
+}
+
+
+Nesse caso, null representa uma ausência de informação que o próprio programa definiu.
+
+Já undefined pode aparecer quando você tenta acessar uma propriedade que não existe:
+const usuario = {
+    nome: "Carlos"
+};
+
+console.log(usuario.idade); // undefined
+
+
+O objeto possui a propriedade nome, mas não possui a propriedade idade.
+
+Uma dica importante: prefira === em vez de == nas comparações. Por exemplo, null == undefined retorna true, mas null === undefined retorna false, porque são valores de tipos diferentes.

@@ -19,7 +19,7 @@ const usuario = [
 },
 {
     nome: 'Julio',
-    idade: 27,
+    idade: 14,
     nacionalidade: 'Brasileiro'
 },
 {
@@ -33,5 +33,9 @@ const usuario = [
     nacionalidade: 'Brasileiro'
 }
 ]
+const usuario1 = usuario[0]
+const usuario2 = usuario[1]
+const usuario3 = usuario[2]
+const usuario4 = usuario[3]
 
-validarUsuario(usuario[1].nome, usuario[1].idade)
+validarUsuario(usuario1.nome, usuario1.idade)
