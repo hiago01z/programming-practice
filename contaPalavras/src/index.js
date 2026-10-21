@@ -1,11 +1,12 @@
  
  export  function contaPalavrasDuplicadas(texto) {
   const resultado = {};
-  let palavras = texto.split(/\s+/);
+  let palavras = texto.replace(/[<>.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/);
   palavras = palavras.forEach((palavra) => {
     resultado[palavra] = (resultado[palavra] || 0) + 1;
-  });
-  return resultado;
+  })
+  //return resultado = limpaPalavras(resultado);
+  return resultado
 }
 
 function contaPalavras(texto) {

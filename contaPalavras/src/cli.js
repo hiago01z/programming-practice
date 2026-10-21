@@ -5,15 +5,25 @@ const caminhoTexto = process.argv[2];
 const caminhoPalavrasDuplicadas = process.argv[3];
 
 async function lerArquivo() {
-  let texto = await fs.readFile(caminhoTexto, "utf8");
-  const palavrasDuplicadas = await contaPalavrasDuplicadas(texto);
-  return palavrasDuplicadas;
+  try {
+    const texto = await fs.readFile(caminhoTexto, "utf8");
+    return texto;
+  } catch (erro) {
+    trataErros(erro);
+  }
 }
 
 async function salvaContagemPalavras() {
-  const palavrasDuplicadas = await JSON.stringify(lerArquivo())
-  fs.writeFile(caminhoPalavrasDuplicadas, palavrasDuplicadas)
+  try {
+    let texto = await lerArquivo();
+    const palavrasDuplicadas = await JSON.stringify(
+      contaPalavrasDuplicadas(texto),
+    );
+    fs.writeFile(caminhoPalavrasDuplicadas, palavrasDuplicadas);
+  } catch (erro) {
+    trataErros(erro);
+  }
 }
 
-salvaContagemPalavras()
+salvaContagemPalavras();
 //use programming-practice\contaPalavras\src> node cli.js ../arquivoTexto/textoExemplo.txt /caminhoNovoArquivo/arquivo.txt no terminal
