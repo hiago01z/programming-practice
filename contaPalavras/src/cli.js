@@ -16,4 +16,4 @@ async function salvaContagemPalavras() {
 }
 
 salvaContagemPalavras()
-//use programming-practice\contaPalavras\src> node cli.js ../arquivoTexto/textoExemplo.txt no terminal
+//use programming-practice\contaPalavras\src> node cli.js ../arquivoTexto/textoExemplo.txt /caminhoNovoArquivo/arquivo.txt no terminal
