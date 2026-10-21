@@ -1,16 +1,19 @@
-import fs from 'fs';
-import { contaPalavrasDuplicadas } from './index.js';
-import trataErros  from './erros/trataErros.js';
+import fs from "node:fs/promises";
+import { contaPalavrasDuplicadas } from "./index.js";
+import trataErros from "./erros/trataErros.js";
 const caminhoTexto = process.argv[2];
+const caminhoPalavrasDuplicadas = process.argv[3];
 
-  fs.readFile(caminhoTexto, "utf8", (erro, textoAqui) => {
-    try {
-      if (erro) throw erro;
-      console.log(textoAqui);
-      contaPalavrasDuplicadas(textoAqui);
-    } catch (erro) {
-      trataErros(erro);
-    }
-  });
+async function lerArquivo() {
+  let texto = await fs.readFile(caminhoTexto, "utf8");
+  const palavrasDuplicadas = await contaPalavrasDuplicadas(texto);
+  return palavrasDuplicadas;
+}
 
+async function salvaContagemPalavras() {
+  const palavrasDuplicadas = await JSON.stringify(lerArquivo())
+  fs.writeFile(caminhoPalavrasDuplicadas, palavrasDuplicadas)
+}
+
+salvaContagemPalavras()
 //use programming-practice\contaPalavras\src> node cli.js ../arquivoTexto/textoExemplo.txt no terminal
