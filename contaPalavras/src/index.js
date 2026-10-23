@@ -14,9 +14,5 @@ function contaPalavras(texto) {
   console.log("Existem ", texto.length, " palavras no texto.");
 }
 
-function limpaPalavras(palavras) {
-  palavras = palavras.replace(/[<>.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-  return palavras;
-}
 
 //use programming-practice\contaPalavras\src> node cli.js ../arquivoTexto/textoExemplo.txt no terminal
