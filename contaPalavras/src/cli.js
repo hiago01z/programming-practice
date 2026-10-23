@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import { contaPalavrasDuplicadas } from "./index.js";
 import trataErros from "./erros/trataErros.js";
+import { coletaKeys } from "./helpers.js";
 const caminhoTexto = process.argv[2];
 const caminhoPalavrasDuplicadas = process.argv[3];
 
