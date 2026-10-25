@@ -1,30 +1,43 @@
-import fs from "node:fs/promises";
-import { contaPalavrasDuplicadas } from "./index.js";
-import trataErros from "./erros/trataErros.js";
-import { coletaKeys } from "./helpers.js";
-const caminhoTexto = process.argv[2];
-const caminhoPalavrasDuplicadas = process.argv[3];
+import fs from 'fs';
+import trataErros from './erros/funcoesErro.js';
+import { contaPalavras } from './index.js';
+import { montaSaidaArquivo } from './helpers.js';
 
-async function lerArquivo() {
+const caminhoArquivo = process.argv;
+const link = caminhoArquivo[2];
+const endereco = caminhoArquivo[3];
+
+fs.readFile(link, 'utf-8', (erro, texto) => {
   try {
-    const texto = await fs.readFile(caminhoTexto, "utf8");
-    return texto;
-  } catch (erro) {
+    if (erro) throw erro
+    const resultado = contaPalavras(texto);
+    criaESalvaArquivo(resultado, endereco)
+  } catch(erro) {
     trataErros(erro);
+  }
+})
+
+async function criaESalvaArquivo(listaPalavras, endereco) {
+  const arquivoNovo = `${endereco}/resultado.txt`;
+  const textoPalavras = montaSaidaArquivo(listaPalavras);
+  try {
+    await fs.promises.writeFile(arquivoNovo, textoPalavras);
+    console.log('arquivo criado');
+  } catch(erro) {
+    throw erro;
   }
 }
 
-async function salvaContagemPalavras() {
-  try {
-    let texto = await lerArquivo();
-    const palavrasDuplicadas = await JSON.stringify(
-      contaPalavrasDuplicadas(texto),
-    );
-    fs.writeFile(caminhoPalavrasDuplicadas, palavrasDuplicadas);
-  } catch (erro) {
-    trataErros(erro);
-  }
-}
-
-salvaContagemPalavras();
-//use programming-practice\contaPalavras\src> node cli.js ../arquivoTexto/textoExemplo.txt /caminhoNovoArquivo/arquivo.txt no terminal
+// function criaESalvaArquivo(listaPalavras, endereco) {
+//   const arquivoNovo = `${endereco}/resultado.txt`;
+//   const textoPalavras = JSON.stringify(listaPalavras);
+  
+//   fs.promises.writeFile(arquivoNovo, textoPalavras)
+//     .then(() => {
+//       console.log('arquivo criado');
+//     })
+//     .catch((erro) => {
+//       throw erro
+//     })
+//     .finally(() => console.log('operação finalizada'))
+// }

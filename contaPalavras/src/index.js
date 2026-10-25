@@ -1,18 +1,30 @@
- 
- export  function contaPalavrasDuplicadas(texto) {
-  const resultado = {};
-  let palavras = texto.replace(/[<>.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/);
-  palavras = palavras.forEach((palavra) => {
-    resultado[palavra] = (resultado[palavra] || 0) + 1;
+export function contaPalavras(texto) {
+  const paragrafos = extraiParagrafos(texto)
+  const contagem = paragrafos.flatMap((paragrafo) => {
+    if (!paragrafo) return [];
+    return verificaPalavrasDuplicadas(paragrafo);
   })
-  //return resultado = limpaPalavras(resultado);
-  return resultado
+  return contagem;
 }
 
-function contaPalavras(texto) {
-  texto = texto.split(/\s+/);
-  console.log("Existem ", texto.length, " palavras no texto.");
+function extraiParagrafos(texto) {
+  return texto.toLowerCase().split('\n');
 }
 
+function limpaPalavras(palavra) {
+  return palavra.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+}
+
+function verificaPalavrasDuplicadas(texto) {
+  const listaPalavras = texto.split(' ');
+  const resultado = {};
+  listaPalavras.forEach(palavra => {
+    if (palavra.length >= 3) {
+      const palavraLimpa = limpaPalavras(palavra);
+      resultado[palavraLimpa] = (resultado[palavraLimpa] || 0) + 1
+    }
+  })
+  return resultado;
+}
 
 //use programming-practice\contaPalavras\src> node cli.js ../arquivoTexto/textoExemplo.txt no terminal
