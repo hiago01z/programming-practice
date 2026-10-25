@@ -20,6 +20,7 @@ fs.readFile(link, 'utf-8', (erro, texto) => {
 async function criaESalvaArquivo(listaPalavras, endereco) {
   const arquivoNovo = `${endereco}/resultado.txt`;
   const textoPalavras = montaSaidaArquivo(listaPalavras);
+  console.log(textoPalavras)
   try {
     await fs.promises.writeFile(arquivoNovo, textoPalavras);
     console.log('arquivo criado');
