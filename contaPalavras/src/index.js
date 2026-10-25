@@ -27,4 +27,4 @@ function verificaPalavrasDuplicadas(texto) {
   return resultado;
 }
 
-//use programming-practice\contaPalavras\src> node cli.js ../arquivoTexto/textoExemplo.txt no terminal
+//use programming-practice\contaPalavras\src> node cli.js ../arquivos/textoExemplo.txt ../novoArquivo/    no terminal
