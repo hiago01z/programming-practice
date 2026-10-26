@@ -1,4 +1,4 @@
-# Praticando lógica de programação com JavaScript-Node.js
+# Praticando JavaScript-Node.js
 
 ## Este repositório é dedicado aos micro programas que desenvolvo enquanto pratico JavaScript-Node.js e lógica de programação.
 
