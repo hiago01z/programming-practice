@@ -32,10 +32,14 @@ async function criaESalvaArquivo(listaPalavras, endereco) {
 }
 
 program
-  .name("Conta Palavras Duplicadas")
-  .description("Conta palavras duplicadas e salva em um arquivo separado.")
-  .version("0.0.1")
-  .argument("<arquivo>", "Arquivo recebido")
-  .argument("<destino>", "Novo arquivo")
-  .action((arquivo, destino) => {});
-program.parse(process.argv);
+  .version('0.0.1')
+  .option('-t, texto <string>', 'Texto a ser lido')
+  .option('-d, destino <string>', 'Destino do novo arquivo')
+  .action((options)=>{
+    const {texto, destino} = options
+    if(!texto || !destino){
+      console.error('Texto ou destino do novo arquivo inválido')
+      program.help()
+      return
+    }
+  })
